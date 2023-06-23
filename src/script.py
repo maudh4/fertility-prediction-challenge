@@ -55,11 +55,75 @@ def predict_outcomes(df):
     # individual did not have a child during 2020-2022, while '1' implies that
     # they did.
 
-    # Keep 
-    keepcols = ['burgstat2019', 'leeftijd2019', 'woonvorm2019', 'oplmet2019', 'aantalki2019']
-    nomem_encr = df["nomem_encr"]
-    
-    df = df.loc[:, keepcols]
+    keepcols = ['gebjaar', 
+            'geslacht',
+            'oplmet2017', 
+            'oplmet2018', 
+            'oplmet2019', 
+            'aantalki2017', 
+            'aantalki2018', 
+            'aantalki2019', 
+            'positie2017',
+            'positie2018', 
+            'positie2019', 
+            'leeftijd2017',
+            'leeftijd2018', 
+            'leeftijd2019', 
+            'aantalhh2017', 
+            'aantalhh2018', 
+            'aantalhh2019', 
+            'lftdhhh2017',
+            'lftdhhh2018', 
+            'lftdhhh2019',
+            'partner2017',
+            'partner2018',
+            'partner2019',
+            'belbezig2017', 
+            'belbezig2018',
+            'belbezig2019',
+            'brutohh_f2017',
+            'brutohh_f2018', 
+            'brutohh_f2019',
+            #'cf17k454', 
+            'cf18k454',
+            #'cf19k454', 
+            #'cf17k455', 
+            'cf18k455',
+            #'cf19k455',
+            #'cf17k130',
+            'cf18k130',
+            #'cf19k130',
+            #'cf17k129',
+            'cf18k129',
+            #'cf19k129',
+            #'cf17k128',
+            'cf18k128',
+            #'cf19k128',
+            #'cf17k407', 
+            #'cf18k407',
+            #'cf19k407', 
+            #'cf17k408', 
+            #'cf18k408',
+            #'cf19k408',
+           ]
+    data = data.loc[:, keepcols]
+
+
+    # #### Categorical versus Numerical features
+    #Categorical variables 
+    categorical_columns_selector = selector(dtype_include=object)
+    categorical_columns = categorical_columns_selector(data)
+
+    #Numerical variables
+    numerical_columns_selector = selector(dtype_exclude=object)
+    numerical_columns = numerical_columns_selector(data)
+
+    for col in numerical_columns:
+        col_mean = data[col].mean()
+        data[col] = data[col].fillna(col_mean)
+
+    for col in categorical_columns:
+       data[col] = data[col].fillna('none')
     
     # Load your trained model from the models directory
     model_path = os.path.join(os.path.dirname(__file__), "..", "models", "model.joblib")
