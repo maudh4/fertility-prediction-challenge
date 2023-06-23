@@ -45,6 +45,7 @@ args = parser.parse_args()
 def predict_outcomes(df):
     """Process the input data and write the predictions."""
 
+    
     # The predict_outcomes function accepts a Pandas DataFrame as an argument
     # and returns a new DataFrame with two columns: nomem_encr and
     # prediction. The nomem_encr column in the new DataFrame replicates the
