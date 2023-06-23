@@ -107,24 +107,24 @@ def predict_outcomes(df):
             #'cf18k408',
             #'cf19k408',
            ]
-    data = data.loc[:, keepcols]
+    df = df.loc[:, keepcols]
 
 
     # #### Categorical versus Numerical features
     #Categorical variables 
     categorical_columns_selector = selector(dtype_include=object)
-    categorical_columns = categorical_columns_selector(data)
+    categorical_columns = categorical_columns_selector(df)
 
     #Numerical variables
     numerical_columns_selector = selector(dtype_exclude=object)
-    numerical_columns = numerical_columns_selector(data)
+    numerical_columns = numerical_columns_selector(df)
 
     for col in numerical_columns:
-        col_mean = data[col].mean()
-        data[col] = data[col].fillna(col_mean)
+        col_mean = df[col].mean()
+        df[col] = df[col].fillna(col_mean)
 
     for col in categorical_columns:
-       data[col] = data[col].fillna('none')
+       df[col] = df[col].fillna('none')
     
     # Load your trained model from the models directory
     model_path = os.path.join(os.path.dirname(__file__), "..", "models", "model.joblib")
