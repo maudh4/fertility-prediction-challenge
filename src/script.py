@@ -65,7 +65,8 @@ def predict_outcomes(df):
     from sklearn.pipeline import make_pipeline
     from sklearn.linear_model import LogisticRegression
 
-    keepcols = ['gebjaar', 
+    keepcols = ['nomem_encr', 
+            'gebjaar', 
             'geslacht',
             'oplmet2017', 
             'oplmet2018', 
