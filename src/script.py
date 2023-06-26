@@ -137,13 +137,13 @@ def predict_outcomes(df):
        df[col] = df[col].fillna('none')
     
     # Load your trained model from the models directory
-    model_path = os.path.join(os.path.dirname(__file__), "..", "models", "model.joblib")
+    model_path = os.path.join(os.path.dirname(__file__), "..", "models", "team_5highfive_1.joblib")
     model = load(model_path)
 
     # Use your trained model for prediction
     predictions = model.predict(df)
     # Return the result as a Pandas DataFrame with the columns "nomem_encr" and "prediction"
-    return pd.concat([nomem_encr, pd.Series(predictions, name="prediction")], axis=1)
+    return pd.concat([df['nomem_encr'], pd.Series(predictions, name="prediction")], axis=1)
 
 
 def predict(input_path, output):
