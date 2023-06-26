@@ -4,6 +4,7 @@ This is an example script to generate the outcome variable given the input datas
 This script should be modified to prepare your own submission that predicts 
 the outcome for the benchmark challenge by changing the predict_outcomes function. 
 
+
 The predict_outcomes function takes a Pandas data frame. The return value must
 be a data frame with two columns: nomem_encr and outcome. The nomem_encr column
 should contain the nomem_encr column from the input data frame. The outcome
