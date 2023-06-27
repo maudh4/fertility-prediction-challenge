@@ -55,27 +55,19 @@ def predict_outcomes(df):
     # individual did not have a child during 2020-2022, while '1' implies that
     # they did.
 
-    #Column selection
+        #Column selection
     from sklearn.compose import make_column_selector as selector
     from sklearn.compose import ColumnTransformer
 
-    #Feature selection
-    from sklearn.feature_selection import SelectKBest, f_classif
     #Model
     from sklearn.preprocessing import OneHotEncoder
     from sklearn.preprocessing import StandardScaler
     from sklearn.pipeline import make_pipeline
-    from sklearn.pipeline import Pipeline
-    from sklearn.linear_model import LogisticRegression
     from sklearn.neighbors import KNeighborsClassifier 
-    from sklearn.model_selection import cross_validate
 
-    keepcols = ['nomem_encr',
+    keepcols = ['nomem_encr', 
             'gebjaar', 
             'geslacht',
-            'herkomstgroep2017', 
-            'herkomstgroep2018', 
-            'herkomstgroep2019', 
             'oplmet2017', 
             'oplmet2018', 
             'oplmet2019', 
@@ -103,27 +95,27 @@ def predict_outcomes(df):
             'brutohh_f2017',
             'brutohh_f2018', 
             'brutohh_f2019',
-            #'cf17j454', 
+            #'cf17k454', 
             'cf18k454',
-            #'cf19l454', 
-            #'cf17j455', 
+            #'cf19k454', 
+            #'cf17k455', 
             'cf18k455',
-            #'cf19l455',
-            #'cf17j130', 
+            #'cf19k455',
+            #'cf17k130',
             'cf18k130',
-            #'cf19l130',
-            #'cf17j129',
+            #'cf19k130',
+            #'cf17k129',
             'cf18k129',
-            #'cf19l129',
-            'cf17j128',
+            #'cf19k129',
+            #'cf17k128',
             'cf18k128',
-            'cf19l128', 
-            #'cf17j407', 
+            #'cf19k128',
+            #'cf17k407', 
             #'cf18k407',
-            #'cf19l407', 
-            #'cf17j408', 
+            #'cf19k407', 
+            #'cf17k408', 
             #'cf18k408',
-            #'cf19l408',
+            #'cf19k408',
            ]
     df = df.loc[:, keepcols]
 
@@ -145,7 +137,7 @@ def predict_outcomes(df):
        df[col] = df[col].fillna('none')
     
     # Load your trained model from the models directory
-    model_path = os.path.join(os.path.dirname(__file__), "..", "models", "kneighbors_feature_selection.joblib")
+    model_path = os.path.join(os.path.dirname(__file__), "..", "models", "kneighbors.joblib")
     model = load(model_path)
 
     # Use your trained model for prediction
